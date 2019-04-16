@@ -1,0 +1,821 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="theme.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Web services & développement web</h2>
+					<p><a href="https://bisonfoutu.github.io/ng-reveal">https://bisonfoutu.github.io/ng-reveal</a></p>
+					<a href="https://bisonfoutu.github.io/ng-reveal?print-pdf">Version "PDF"</a>
+				</section>
+
+				<section>
+					<h2>Mais il est qui lui ?</h2>
+					<div class="two-column">
+						<img class="profile-picture" height="230" data-src="assets/img/me.jpg" alt="Il est lui !">
+						<p>François Poiré</p>
+						<h4>
+							<a class="text-white" href="mailto:francois.poire+teaching@gmail.com">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+							</a>
+							<a href="https://twitter.com/francoispr_" target="_blank">
+								<i class="fa fa-twitter" aria-hidden="true"></i>
+							</a>
+							<a class="text-white" href="https://github.com/bushybuffalo" target="_blank">
+								<i class="fa fa-github" aria-hidden="true"></i>
+							</a>
+						</h4>
+						<div>
+							<br>
+							<p>
+								<img class="no-margin" src="assets/img/ig2i-logo.png" height="40">
+							</p>
+							<br>
+							<p>
+								<a href="https://www.davidson.fr/" target="_blank"><img height="30" src="assets/img/davidson-name.png"></a>
+							</p>
+							<br>
+							<p>Lead dev fullstack JS</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<section>
+						<h1>OK cool, mais on fait quoi ?</h1>
+					</section>
+					<section>
+						<h2>Au programme:</h2>
+						<img class="fragment" src="assets/img/angular.svg" height="200">
+						<img class="fragment" src="assets/img/pokemon.png" height="100" style="margin: 65px 0"/>
+						<img class="fragment" src="assets/img/ionic-logo.png" height="200">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Web service et APIs</h2>
+					</section>
+
+					<section data-transition="none">
+						<h2>typeof API !== Web service</h2>
+						<p>Tous les web services sont des APIs</p>
+						<p>Toutes les APIs ne sont pas des web services</p>
+					</section>
+
+					<section>
+						<h2>Quelle différence ?</h2>
+						<div class="two-column fragment">
+							<div>
+								<h4>API</h4>
+								<ul class="unstyled">
+									<li>Application</li>
+									<li>Programming</li>
+									<li>Interface</li>
+								</ul>
+							</div>
+							<div>
+								<h4>Web service</h4>
+								<ul>
+									<li>API</li>
+									<li>Web &#8594; HTTP</li>
+									<li>XML</li>
+								</ul>
+							</div>
+						</div>
+						<div class="two-column fragment">
+							<div>
+								<h4>&#8595;</h4>
+								<h4>REST</h4>
+							</div>
+							<div>
+								<h4>&#8595;</h4>
+								<h4>SOAP</h4>
+							</div>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section class="black" data-background="assets/img/soap.gif">
+						<h1 class="black">SOAP</h1>
+						<p>Simple Object Access Protocol</p>
+						<p>Inventé en 1998 pour Microsoft</p>
+						<p>SOAP 1.2 sort en 2003, et perd son acronyme</p>
+					</section>
+
+					<section>
+						<h2>SOAP</h2>
+						<p>Fondamentaux</p>
+						<ul>
+							<li>Description &#8594; WSDL</li>
+							<li>Requête &#8594; XML</li>
+							<li>Réponse &#8594; XML</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>WSDL</h2>
+						<pre><code class="hljs" data-trim>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;wsdl:definitions targetNamespace="http://axis.test.jmdoudoux.com"
+                  xmlns:apachesoap="http://xml.apache.org/xml-soap"
+                  xmlns:impl="http://axis.test.jmdoudoux.com"
+                  xmlns:intf="http://axis.test.jmdoudoux.com"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+&lt;!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)--&gt;
+   &lt;wsdl:message name="additionnerRequest"&gt;
+      &lt;wsdl:part name="valeur1" type="xsd:int"/&gt;
+      &lt;wsdl:part name="valeur2" type="xsd:int"/&gt;
+   &lt;/wsdl:message&gt;
+   &lt;wsdl:message name="additionnerResponse"&gt;
+      &lt;wsdl:part name="additionnerReturn" type="xsd:long"/&gt;
+   &lt;/wsdl:message&gt;
+   &lt;wsdl:portType name="Calculer"&gt;
+      &lt;wsdl:operation name="additionner" parameterOrder="valeur1 valeur2"&gt;
+         &lt;wsdl:input message="impl:additionnerRequest" name="additionnerRequest"/&gt;
+         &lt;wsdl:output message="impl:additionnerResponse" name="additionnerResponse"/&gt;
+      &lt;/wsdl:operation&gt;
+   &lt;/wsdl:portType&gt;
+   &lt;wsdl:binding name="CalculerSoapBinding" type="impl:Calculer"&gt;
+      &lt;wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/&gt;
+      &lt;wsdl:operation name="additionner"&gt;
+         &lt;wsdlsoap:operation soapAction=""/&gt;
+         &lt;wsdl:input name="additionnerRequest"&gt;
+            &lt;wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+              namespace="http://axis.test.jmdoudoux.com" use="encoded"/&gt;
+         &lt;/wsdl:input&gt;
+         &lt;wsdl:output name="additionnerResponse"&gt;
+            &lt;wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+              namespace="http://axis.test.jmdoudoux.com" use="encoded"/&gt;
+         &lt;/wsdl:output&gt;
+      &lt;/wsdl:operation&gt;
+   &lt;/wsdl:binding&gt;
+   &lt;wsdl:service name="CalculerService"&gt;
+      &lt;wsdl:port binding="impl:CalculerSoapBinding" name="Calculer"&gt;
+         &lt;wsdlsoap:address location="http://localhost:8080/TestWS/services/Calculer"/&gt;
+      &lt;/wsdl:port&gt;
+   &lt;/wsdl:service&gt;
+&lt;/wsdl:definitions&gt;</code></pre>
+					</section>
+
+					<section>
+						<h2>Requête</h2>
+						<pre><code class="hljs" data-trim>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;soapenv:Body&gt;
+    &lt;ns0:additionner
+      xmlns:ns0="http://axis.test.jmdoudoux.com"
+      soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;
+      &lt;valeur1 xsi:type="xsd:int"&gt;10&lt;/valeur1&gt;
+      &lt;valeur2 xsi:type="xsd:int"&gt;20&lt;/valeur2&gt;
+    &lt;/ns0:additionner&gt;
+  &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+					</section>
+
+					<section>
+						<h2>Réponse</h2>
+						<pre><code class="hljs" data-trim>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;soapenv:Body&gt;
+    &lt;ns1:additionnerResponse
+      xmlns:ns1="http://axis.test.jmdoudoux.com"
+      soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;
+      &lt;additionnerReturn href="#id0" /&gt;
+    &lt;/ns1:additionnerResponse&gt;
+    &lt;multiRef xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+              id="id0" soapenc:root="0"
+              soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+              xsi:type="xsd:long"&gt;30&lt;/multiRef&gt;
+  &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>REST</h1>
+					</section>
+
+					<section>
+						<h2>REST</h2>
+						<p>REpresentational State Transfer</p>
+						<ul>
+							<li>Pas d'équivalent à WSDL (doc d'API, e.g. <a href="https://swagger.io/" target="_blank">Swagger</a>)</li>
+							<li>Requête &#8594; JSON</li>
+							<li>Réponse &#8594; JSON ou autre</li>
+						</ul>
+					</section>
+
+					<section>
+
+						<h5>A quoi ressemble une requête ?</h5>
+						<div class="fragment">
+							<p>REST</p>
+							<pre><code class="hljs" data-trim>
+http://www.acme.com/library/books/12345</code></pre>
+						</div>
+						<div class="fragment">
+							<p>SOAP</p>
+							<pre><code class="hljs" data-trim>&lt;?xml version="1.0"?&gt;
+&lt;soap:Envelope
+ xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding"&gt;
+  &lt;soap:body pb="http://www.acme.com/library"&gt;
+    &lt;pb:GetBook&gt;
+      &lt;pb:BookID&gt;12345&lt;/pb:BookID&gt;
+    &lt;/pb:GetBook&gt;
+  &lt;/soap:body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h5>Réponse:</h5>
+						<div class="two-column">
+							<div>
+								<h4>XML</h4>
+								<pre><code class="hljs" data-trim>&lt;?xml version="1.0"?&gt;
+&lt;book id="12345"&gt;
+  &lt;title&gt;Object Thinking&lt;/title&gt;
+  &lt;author&gt;David West&lt;/author&gt;
+  &lt;published&gt;
+    &lt;by&gt;Microsoft Press&lt;/by&gt;
+    &lt;year&gt;2004&lt;/year&gt;
+  &lt;/published&gt;
+&lt;/book&gt;</code></pre>
+							</div>
+							<div>
+								<h4>JSON</h4>
+								<pre><code class="hljs" data-trim>{
+  "id": 12345,
+  "title": "Object Thinking",
+  "author": "David West",
+  "published": {
+    "by": "Microsoft Press",
+    "year": 2004
+  }
+}</code></pre>
+							</div>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h4>API RESTful: Fonctionnement</h4>
+						<p>Repose sur des opérations CRUD, et le protocole HTTP</p>
+						<ul>
+							<li>Create &#8594; POST, PUT</li>
+							<li>Read &#8594; GET</li>
+							<li>Update &#8594; PUT, PATCH</li>
+							<li>Delete &#8594; DELETE</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Read &#8594; GET</h2>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books/12345
+Method:       GET
+Body:         Empty</code></pre>
+					</section>
+
+					<section>
+						<h2>Create &#8594; POST</h2>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books
+Method:       POST
+Body:         {
+                "title": "Object Thinking",
+                "author": "David West",
+                "published": {
+                  "by": "Microsoft Press",
+                  "year": 2004
+                }
+              }</code></pre>
+					</section>
+
+					<section>
+						<h2>Create &#8594; PUT</h2>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books/123
+Method:       PUT
+Body:         {
+                "id": 123,
+                "title": "Object Thinking",
+                "author": "David West",
+                "published": {
+                  "by": "Microsoft Press",
+                  "year": 2004
+                }
+              }</code></pre>
+					</section>
+
+					<section>
+						<h2>Delete &#8594; DELETE</h2>
+						<pre><code class="hljs" data-trim>
+Request URL:  http://www.acme.com/library/books/123
+Method:       DELETE
+Body:         Empty
+      </code></pre>
+					</section>
+
+					<section>
+						<h2>Update &#8594; PUT</h2>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books/123
+Method:       PUT
+Body:         {
+                "id": 123,
+                "title": "Object Thinking",
+                "author": "David East",
+                "published": {
+                  "by": "Microsoft Press",
+                  "year": 2004
+                }
+              }</code></pre>
+					</section>
+
+					<section>
+						<h2>UPDATE &#8594; PATCH</h2>
+						<p><a target="_blank" href="https://tools.ietf.org/html/rfc5789">RFC5789 - Mars 2010 - PATCH Method for HTTP</a>
+						</p>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books/123
+Method:       PATCH
+Body:         [description of changes]</code></pre>
+						<h4 class="fragment">So what ?</h4>
+					</section>
+
+					<section>
+						<h2>UPDATE &#8594; PATCH</h2>
+						<p><a target="_blank" href="https://tools.ietf.org/html/rfc6902">RFC6902 - Avril 2013 - JSON Patch</a></p>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books/123
+Method:       PATCH
+Body:         [
+                { "op": "replace", "path": "/published/by", "value": "Apple Press" },
+                { "op": "remove", "path": "/author" },
+                { "op": "add", "path": "/published/city", "value": "Lens" }
+              ]</code></pre>
+						<img class="fragment" height="200" src="assets/img/1ton.png">
+					</section>
+
+					<section>
+						<h2>UPDATE &#8594; PATCH</h2>
+						<p><a target="_blank" href="https://tools.ietf.org/html/rfc7396">RFC7396 - Octobre 2014 - JSON Merge Patch</a>
+						</p>
+						<pre><code class="hljs" data-trim>Request URL:  http://www.acme.com/library/books/123
+Method:       PATCH
+Body:         {
+                "author": null,
+                "published": {
+                  "by": "Apple Press",
+                  "city": "Lens"
+                }
+              }</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Angular</h1>
+						<img src="assets/img/angular.svg" height="400">
+					</section>
+
+					<section>
+						<h2>Liens utiles</h2>
+						<p><a href="https://angular.io/api">Documentation de l'API d'Angular</a></p>
+						<p><a href="https://angular.io/guide/styleguide">Angular Style Guide</a></p>
+					</section>
+
+					<section>
+						<h2>Angular != AngularJS</h2>
+						<p class="fragment">TypeScript, ES6+</p>
+						<p class="fragment">RIP $scope, controller, jQuery (angular.element)</p>
+						<p class="fragment">Introduce ES6 modules, classes, components</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>TP n°1 - Tour of Star Wars Heroes</h2>
+						<p><a href="https://bisonfoutu.github.io/ng-sw-heroes" target="_blank">https://bisonfoutu.github.io/ng-sw-heroes</a></p>
+					</section>
+
+					<section>
+						<h2>Angular CLI</h2>
+						<p>Documentation:</p>
+						<div>
+							<pre><code class="hljs">ng help</code></pre>
+						</div>
+						<p>OU</p>
+						<p>
+							<a href="https://angular.io/cli" target="_blank">https://angular.io/cli</a>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>TP n°2 - Pokédex</h2>
+						<p><a href="https://material.angular.io/" target="_blank">https://material.angular.io/</a></p>
+						<p><a href="https://www.getpostman.com/collections/a741976ce21e3e2b69fc" target="_blank">Postman</a></p>
+					</section>
+
+					<section>
+						<h3>Préparation du projet</h3>
+						<p class="smaller">Les points 1 et 2 sont facultatifs, si vous avez déjà installé votre environnement pour le tutoriel vous pouvez les passer.</p>
+						<ol class="smaller">
+							<li>Installer NodeJS et npm sur le poste -> <a href="https://nodejs.org/fr/">https://nodejs.org/fr/</a> en LTS</li>
+							<li>Dans la console, exécuter: <pre class="small"><code class="hljs">npm install -g @angular/cli</code></pre></li>
+							<li>Puis exécuter <pre class="small"><code class="hljs">ng new &lt;nom_du_projet&gt; --style scss --routing</code></pre></li>
+							<li>Installer Angular Material: <pre class="small"><code class="hljs">ng add @angular/material </code></pre></li>
+							<li>Le CLI devrait vous demander de choisir un thème. Choisissez un des deux thèmes sombres, Pink/Blue Grey ou Purple/Green, puis acceptez les 2 questions suivantes.</li>
+							<li>Ouvrir le répertoire du projet dans un IDE, puis dans la console, exécuter <pre class="small"><code class="hljs">npm start -- -o</code></pre> </li>
+						</ol>
+					</section>
+
+					<section>
+						<h4>Lister les Pokémons - Récupération</h4>
+						<ol class="smaller">
+							<li>Créer un module pokemons</li>
+							<li>Créer un component pokemon-list dans ce module</li>
+							<li>Créer un service pokemon dans ce module pour récupérer la liste des Pokémons via l'API</li>
+							<li>
+								<p>Notre Pokédex ne concernera que la première génération, soit les 151 premiers Pokémons.</p>
+								<p>La route permettant de récupérer tous les Pokémons est paginée.</p>
+								<p>Dans un premier temps, vous n'afficherez donc qu'une partie des pokémons du Pokédex (Plus tard dans le
+									TP, on utilisera une librairie pour gérer le scroll infini).</p>
+								<p>Créer au sein du service pokemon une méthode getPokemons qui récupère la liste des Pokémons.</p>
+							</li>
+						</ol>
+					</section>
+
+					<section>
+						<h4>Lister les Pokémons - Affichage</h4>
+						<ol class="smaller">
+							<li>La liste des Pokémons contiendra pour chaque élément son numéro, son nom et l'image de son sprite</li>
+							<li>
+								Les sprites sont disponibles dans une archive sur Moodle. L'archive contient également des images et des
+								fichiers audio, qu'on utilisera pour la fiche détaillée. Décompressez cette archive dans src/assets.
+							</li>
+							<li>On utilisera le component
+								<a href="https://material.angular.io/components/list/overview#lists-with-avatars">MatList</a> d'Angular
+								Material pour créer une liste d'items avec avatar (voir format ci-dessous)
+							</li>
+						</ol>
+						<img src="assets/img/pkmn-list.jpg" height="250">
+					</section>
+
+					<section>
+						<h4>Informations d'un Pokémon - Routing</h4>
+						<ol class="smaller">
+							<li>En cliquant sur un Pokémon dans la liste, on souhaite accéder à sa fiche détaillée</li>
+							<li>Créer un component pokemon-detail dans le module pokemons</li>
+							<li>Ajouter une route dans le module de routing du module pokemons vers ce component</li>
+							<li>Ajouter l'attribut <a href="https://angular.io/api/router/RouterLink">routerLink</a> sur chaque ligne de
+								pokémon dans le component MatListItem pour intégrer le lien vers le détail
+							</li>
+						</ol>
+					</section>
+
+					<section>
+						<h4>Informations d'un Pokémon - Récupération</h4>
+						<ol class="smaller">
+							<li>A partir du numéro du Pokémon, on va pouvoir récupérer plus d'informations à son sujet</li>
+							<li>Ajouter une méthode dans le service pokemon pour récupérer les informations d'un Pokémon depuis l'API</li>
+							<li>Dans le component pokemon-detail, récupérer le numéro du Pokémon à partir de l'ActivatedRoute pour pouvoir
+								l'utiliser comme paramètre de la méthode créée précédemment
+							</li>
+						</ol>
+					</section>
+
+					<section>
+						<h4>Informations d'un Pokémon - Affichage</h4>
+						<ol class="smaller">
+							<li>On souhaite afficher les informations de base d'une fiche de Pokémon classique</li>
+							<li>Les components à utiliser pour présenter la fiche sont MatCard, MatGridList, MatList, MatChipList</li>
+							<li>
+								Côté format, le numéro sera toujours à afficher en 3 chiffres, et les poids et taille avec une décimale.
+							</li>
+							<li>On souhaite également, comme dans un vrai Pokédex, jouer le cri du Pokémon lorsqu'on accède à sa page, et
+								pouvoir le réécouter via un bouton. On utilisera pour ce faire la balise audio d'HTML5, avec l'option
+								autoplay, et on ajoutera un MatIconButton pour pouvoir rejouer le cri du Pokémon.</li>
+							<li>
+								<p>La fiche du Pokémon sera organisée comme sur l'image ci-dessous:</p>
+								<p style="text-align: center">
+									<img src="./assets/img/pkmn-detail.png" height="250">
+								</p>
+							</li>
+						</ol>
+					</section>
+
+					<section>
+						<h4>Si quand j'avance tu recules...</h4>
+						<div class="smaller">
+							<p>Nous avons désormais une application qui possède 2 pages, une liste et un détail.</p>
+							<p>On peut accéder au détail depuis la liste, mais on aimerait aussi pouvoir revenir à la liste !</p>
+						</div>
+						<br>
+						<ol class="smaller">
+							<li>Ajouter un bouton dans le component pokemon-detail pour permettre le retour à la liste des Pokémons</li>
+						</ol>
+					</section>
+
+					<section>
+						<h4>Vers l'infini et au-delà !</h4>
+						<div class="smaller">
+							<p>On sait désormais afficher la liste des pokémons et leurs fiches, mais on n'en affiche que 10.</p>
+							<p>Vous vous rappelez que j'avais dit qu'on ferait du scroll infini ? C'est maintenant !</p>
+						</div>
+						<br>
+						<ol class="smaller">
+							<li>Installer <a href="https://github.com/orizens/ngx-infinite-scroll">ngx-infinite-scroll</a></li>
+							<li>Importer l'InfiniteScrollModule dans le PokemonsModule</li>
+							<li>Ajouter l'attribut infiniteScroll et l'évènement (scrolled) sur le tag de la MatNavList</li>
+							<li>Créer une méthode onScroll qui sera exécutée par l'évènement (scrolled)</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>Ca y est, c'est terminé !</h3>
+						<p>Enfin pas vraiment... Mais c'est déjà un début.</p>
+						<br>
+						<div class="smaller">
+							<p>
+								Avant de passer à la suite, vérifiez bien que le projet correspond aux attentes, notamment en termes de
+								visuel. (on est pas au pixel près, mais a minima que les pages soient organisées comme dans les exemples)
+							</p>
+							<p>Pour me rendre vos travaux, vous pouvez héberger vos sources sur Git et m'en donner l'accès</p>
+							<p>Une fois que c'est fait, vous pourrez faire une nouvelle branche pour la suite.</p>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>TP n°3 - Pokédex(suite)</h2>
+						<p><a href="https://material.angular.io/" target="_blank">https://material.angular.io/</a></p>
+						<p><a href="https://www.getpostman.com/collections/a741976ce21e3e2b69fc" target="_blank">Postman</a></p>
+					</section>
+
+					<section>
+						<h3>On réorganise tout !</h3>
+						<div class="smaller">
+							<p>On a vu la navigation, c'est une bonne chose... mais on n'a pas vraiment assez de contenu pour que chaque
+								page occupe toute la place sur l'écran.</p>
+							<p>Du coup, on va changer un peu l'organisation !</p>
+							<br>
+							<ol>
+								<li>Créer un nouveau component pokedex dans le module pokemons</li>
+								<li>A l'aide du component MatSidenav, et des components pokemon-list et pokemon-detail, créer une vue en
+									deux colonnes, avec la liste à gauche et le détail à droite
+								</li>
+								<li>On souhaite bien entendu que le "menu" reste affiché en permanence, il faudra donc ajouter les bons
+									attributs pour ce faire.
+								</li>
+							</ol>
+						</div>
+					</section>
+
+					<section>
+						<h3>Section de recherches</h3>
+						<div class="smaller">
+							<p>
+								On a beau n'avoir que 151 Pokémons à parcourir, on n'a pas toujours envie de scroller la liste jusqu'en bas,
+								d'autant que ça fait télécharger des données inutilement (même si l'API gère très bien son cache :-) ).
+							</p>
+							<p>Pour régler le problème, on va ajouter un champ de recherche !</p>
+						</div>
+						<br>
+						<ol class="smaller">
+							<li>Dans le component pokemon-list, ajouter un champ de recherche au-dessus de la liste</li>
+							<li>Utiliser les éléments mis à disposition par Angular Material pour styliser le champ</li>
+							<li>
+								<p>On devra pouvoir rechercher dans la liste soit par nom, soit par numéro</p>
+								<p>L'API implémesnte un paramètre dédié à la recherche, un exemple est donné dans la collection Postman.</p>
+							</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>Encore un petit effort...</h3>
+						<div class="smaller">
+							<p>Si vous avez terminé, comme pour le TP n°2, vous pouvez pousser votre code sur votre repo Git.</p>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>TP n°4 - Pokédex (suite et fin)</h3>
+						<p><a href="https://material.angular.io/" target="_blank">https://material.angular.io/</a></p>
+						<p><a href="https://www.getpostman.com/collections/a741976ce21e3e2b69fc" target="_blank">Postman</a></p>
+					</section>
+
+					<section>
+						<h3>Mon équipe de Pokémons</h3>
+						<p class="small">Pour cette section, le choix d'intégration visuelle est libre.</p>
+						<br>
+						<p class="smaller">Maintenant qu'on maîtrise bien l'affichage de données, il est temps de jouer avec.</p>
+						<p class="smaller">L'étape logique suivante est de créer son équipe de Pokémons... Et c'est là que ça se corse.</p>
+						<br>
+						<p class="smaller"> Partant du principe qu'on ne doit jamais faire confiance à ses utilisateurs, l'API que j'ai
+							développée impose une connexion pour utiliser les routes liées son équipe.</p>
+						<br>
+						<p class="smaller">Il faut donc commencer par se créer un compte avec son email.</p>
+					</section>
+
+					<section>
+						<h3>Connexion</h3>
+						<p class="smaller">Concernant la connexion, deux options s'offrent à vous:</p>
+						<ul class="smaller">
+							<li>Créer un formulaire de connexion, qui permettrait en théorie de se connecter avec n'importe quel compte</li>
+							<li>Faire l'appel de connexion à l'init du TeamComponent, ce qui implique de renseigner vos identifiant et
+								mot de passe dans le code source, ou un peu mieux, dans le fichier de configuration environment.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Récupération de mon équipe</h3>
+						<ul class="smaller">
+							<li>Deux routes sont disponibles pour la ressource Team: une en GET, et une en PUT</li>
+							<li>Tant que vous n'avez pas créé votre équipe, la route GET vous renvoie un tableau vide.</li>
+							<li>La route PUT gère à la fois la création et la modification, puisqu'on sait déjà qu'on va
+								créer une équipe correspondant à l'utilisateur connecté.</li>
+							<li>Ces routes nécessitent d'être connecté puisqu'elles sont liées à l'utilisateur courant.</li>
+							<li>Il faut donc passer lors de l'appel un header Authorization qui aura pour valeur 'Bearer ' suivi de l'access_token récupéré lors du login.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Affichage de mon équipe</h3>
+						<p class="small">Pour cette étape, vous pouvez créer votre équipe directement via Postman pour déjà avoir des Pokémons à afficher.</p>
+						<br>
+						<ul class="smaller">
+							<li>Vous pouvez constater que l'équipe gérée par l'API n'est constituée que du tableau des ids des pokémons correspondants.</li>
+							<li>Il va donc falloir récupérer les détails de ces pokémons à partir des ids concernés.</li>
+							<li>La méthode attendue consiste à créer un tableau d'observables (autant d'appels au service que d'ids)
+								et à utiliser la méthode forkJoin() de rxjs et d'y subscribe pour les récupérer tous en même temps.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Modification de mon équipe</h3>
+						<ul class="smaller">
+							<li>Le body attendu pour la création/modification d'équipe est le même que celui renvoyé par l'API: un tableau d'ids</li>
+							<li>Pas de consigne spécifique concernant le format du formulaire d'ajout/suppression de pokémons.</li>
+							<li>A titre personnel, j'ai réutilisé la partie de gauche de l'application, séparant la liste en 2 onglets
+								via les tabs d'Angular Material.</li>
+							<li>Attention à gérer la contrainte de taille de l'équipe, qui peut contenir 6 pokémons maximum. L'API gère
+								cette limite et vous renverra une erreur si la taille est supérieure à 6.</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<img src="assets/img/ionic-logo.png">
+					</section>
+
+					<section>
+						<h2>Liens utiles</h2>
+						<p><a href="https://ionicframework.com/docs/">Documentation de l'API d'Ionic</a></p>
+						<p><a href="https://ionicframework.com/docs/native/">Documentation des plugins Ionic Native</a></p>
+						<p><a href="https://ionicframework.com/docs/intro/tutorial/">Tutoriel officiel d'Ionic</a></p>
+					</section>
+
+					<section>
+						<h3>En résumé, Ionic c'est:</h3>
+						<ul class="small">
+							<li>Un framework basé sur Angular</li>
+							<br>
+							<li>Des composants graphiques Material Design, iOS et Windows Phone</li>
+							<br>
+							<li>Une intégration avec Cordova pour utiliser les APIs natives des appareils</li>
+							<br>
+							<li>Un tas d'outils pour faciliter le développement !</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>TP n°4.5 - Pokédex RELOADED (optionnel)</h2>
+						<p><a href="https://ionicframework.com/docs/">Documentation de l'API d'Ionic</a></p>
+					</section>
+
+					<section>
+						<h3>On prend les mêmes et on recommence</h3>
+						<p>A partir d'un projet Ionic vierge, et du code du TP3, on va recréer notre Pokédex avec Ionic.</p>
+					</section>
+
+					<section>
+						<h3>Création d'un projet Ionic vierge</h3>
+						<ol>
+							<li class="small">Comme d'habitude, on a besoin de NodeJS (8.9.1) et npm</li>
+							<li class="small">Installer le CLI Ionic</li>
+							<pre><code class="hljs">npm install -g ionic@latest</code></pre>
+							<li class="small">Créer le projet avec la commande:</li>
+							<pre><code class="hljs">ionic start &lt;nom_du_projet&gt; blank</code></pre>
+							<li class="small">Accéder au répertoire du projet, puis lancer le livereload via:</li>
+							<pre><code class="hljs">ionic serve --lab</code></pre>
+
+						</ol>
+					</section>
+
+					<section>
+						<h4>En option, vous pouvez lier le projet à un compte Ionic Pro</h4>
+						<p class="small">Cela permettra entre autres de faciliter les tests sur mobile</p>
+						<ol>
+							<li class="small">Créer un compte: <a href="https://dashboard.ionicjs.com/signup">https://dashboard.ionicjs.com/signup</a>
+							</li>
+							<li class="small">Créer son application sur le dashboard</li>
+							<li class="small">Depuis la page de l'application, cliquer sur "Connect existing app" et suivre les
+								instructions
+							</li>
+							<li class="small">Télécharger l'application Ionic DevApp sur votre mobile depuis le store</li>
+							<li class="small">Connecter votre téléphone sur le même réseau Wifi que votre PC</li>
+							<li class="small">Lancer le livereload avec la commande</li>
+							<pre><code class="hljs">ionic serve -c --lab</code></pre>
+							<li class="small">Vous devriez voir apparaître l'application dans la liste sur votre téléphone !</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>Y'a plus qu'à !</h3>
+						<ul class="small">
+							<li>A partir des sources des TP n°2, 3 et 4 et de la documentation d'Ionic, reconstituer le Pokédex avec Ionic.</li>
+						</ul>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+
+		<script>
+			var mouseNav = false;
+			/*Handle navigation with mouse clicks*/
+			window.addEventListener('mousedown', handleClick, false);
+			window.addEventListener('contextmenu', function (e) {
+				if (mouseNav === true) {
+					e.preventDefault();
+				}
+			}, false);
+
+			function handleClick(e) {
+				if (e.button === 1) {
+					mouseNav = !mouseNav;
+				}
+				if (mouseNav === true) {
+					e.preventDefault();
+					if (e.button === 0) Reveal.next();
+					if (e.button === 2) Reveal.prev();
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,114 @@
+body {
+  background: #2D303E;
+}
+
+.reveal .controls {
+  bottom: 90px;
+}
+
+.reveal .no-margin {
+  margin: 0;
+}
+
+.reveal p {
+  margin: 5px;
+}
+
+.reveal pre code {
+  max-height: 450px;
+  font-size: 0.7em;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+  text-transform: none;
+}
+
+.reveal section img {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.reveal ul.unstyled {
+  list-style-type: none;
+}
+
+.reveal .small {
+  font-size: 0.7em;
+}
+
+.reveal .smaller {
+  font-size: 0.55em;
+}
+
+.reveal .two-column {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+}
+
+.reveal .three-column {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+}
+
+.reveal .two-column p, .reveal .three-column p {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  margin-bottom: 10px;
+}
+
+/* custom colors */
+
+.reveal .text-black {
+  color: black;
+}
+
+.reveal .text-white {
+  color: white;
+}
+
+/* custom elements */
+.reveal h3.plan-elt {
+  font-weight: 500;
+}
+
+.reveal img.plan-elt {
+  margin: 0;
+}
+
+.reveal div.key-figures h3 {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.reveal div.key-figures p {
+  font-size: 0.9em;
+}
+
+.reveal .slide-number {
+  left: 30px;
+  bottom: 30px;
+  opacity: 0.9;
+  z-index: 31;
+  font-size: 0.8em;
+  color: white;
+}
+
+.reveal .profile-picture {
+  border-radius: 50%;
+  border: 2px solid white;
+
+}
+
+.reveal .fragment.current-visible.visible:not(.current-fragment) {
+  display: none;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+}
+
+.black, h1.black {
+  color: black;
+}
