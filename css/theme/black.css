@@ -271,3 +271,14 @@ body {
 @media print {
   .backgrounds {
     background-color: #191919; } }
+
+
+/***********************************************
+ * CUSTOM
+ ***********************************************/
+
+.reveal iframe {
+  max-width: unset;
+  max-height: unset;
+  height: 60vh;
+}
