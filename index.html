@@ -161,6 +161,21 @@
 					</section>
 
 					<section>
+						<h4>Lister les Pokémons - Modèle de données</h4>
+						<p class="smaller">Vous aurez peut-être remarqué que l'API ne renvoie pas un tableau, mais un objet comportant plusieurs propriétés, dont un tableau de pokémons.</p>
+						<p class="smaller">Vous ne pouvez donc pas typer le retour de votre méthode de service en tableau de Pokémon.</p>
+						<p class="smaller">Utilisez le modèle suivant pour typer la méthode getPokemons:</p>
+						<pre><code class="hljs">
+	export interface PagedData&lt;T&gt; {
+		data: T[];
+		limit: number;
+		offset: number;
+	}
+						</code></pre>
+
+					</section>
+
+					<section>
 						<h4>Lister les Pokémons - Affichage</h4>
 						<ol class="smaller">
 							<li>La liste des Pokémons contiendra pour chaque élément son numéro, son nom et l'image de son sprite</li>
